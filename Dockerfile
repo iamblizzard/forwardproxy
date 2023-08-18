@@ -8,6 +8,9 @@ RUN set -x  \
  && apk add --update curl gettext acf-squid &&\
   rm -rf /etc/ssl /usr/share/man /tmp/* /var/cache/apk/* /var/lib/apk/* /etc/apk/cache/*
 
+# for using `htpasswd` command
+RUN apk add --update apache2-utils
+
 ENV SQUID_VERSION=3.3.8 \
     SQUID_CACHE_DIR=/var/spool/squid \
     SQUID_LOG_DIR=/var/log/squid \

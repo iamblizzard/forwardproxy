@@ -39,9 +39,25 @@ create_cache_dir() {
   chown -R ${SQUID_USER}:${SQUID_USER} ${SQUID_CACHE_DIR}
 }
 
+create_auth_cred() {
+  touch /etc/squid/passwords
+  chmod -R 777 /etc/squid/passwords
+  local auth_user="user1"
+  if [[ ! -z ${1} ]]; then
+    auth_user="${1}"
+  fi
+  local auth_password="password1"
+  if [[ ! -z ${2} ]]; then
+    auth_password="${2}"
+  fi
+  htpasswd -b /etc/squid/passwords ${auth_user} ${auth_password}
+}
+
+
 create_log_dir
 create_cache_dir
 envsubstitution
+create_auth_cred ${2} ${3}
 
 # default behaviour is to launch squid
 if [[ -z ${1} ]]; then
