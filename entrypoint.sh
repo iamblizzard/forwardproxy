@@ -53,7 +53,6 @@ create_auth_cred() {
   htpasswd -b /etc/squid/passwords ${auth_user} ${auth_password}
 }
 
-
 create_log_dir
 create_cache_dir
 envsubstitution
